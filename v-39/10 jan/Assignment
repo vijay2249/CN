@@ -1,0 +1,4 @@
+1. Attachment : Popen-Mkfifo -Capitalizer 
+
+2. Chat Server with n clients - as explained in the class.
+     Let the clients have threads for sending and receiving. Two Fifos.
