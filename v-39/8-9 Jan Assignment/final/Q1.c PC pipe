@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<unistd.h>
+#include <string.h>  
+#include <stdlib.h>
+int main(){
+   
+   int pfd1[2],pfd2[2];
+   char inputBuffer1[100],outputBuffer1[100]; 
+   char inputBuffer2[100],outputBuffer2[100]; 
+
+   pipe(pfd1);
+   pipe(pfd2);
+   int pid=fork();
+   
+   if(pid>0){
+       close(pfd1[0]);
+       close(pfd2[1]);
+
+         while(1){
+             memset(inputBuffer1, 0, 100);
+             printf("\nParent Pipe Input inside Parent:");   
+             fgets(inputBuffer1,sizeof(inputBuffer1),stdin);
+
+               if(strlen(inputBuffer1)==1)exit(0);
+             write(pfd1[1],inputBuffer1,sizeof(inputBuffer1));
+             
+             memset(outputBuffer1, 0, 100);
+             read(pfd2[0],outputBuffer2,sizeof(outputBuffer2));
+             printf("Child Pipe Output inside Parent: %s",outputBuffer2);  
+       
+         }
+   }
+   else{
+        close(pfd1[1]);
+        close(pfd2[0]);
+     
+         while(1){
+           
+            memset(outputBuffer1, 0, 100);
+            read(pfd1[0],outputBuffer1,sizeof(outputBuffer1));
+            printf("Parent Pipe Output inside Child: %s",outputBuffer1);  
+             
+            memset(inputBuffer1, 0, 100);
+            printf("\nChild Pipe Input inside Child:");
+             fgets(inputBuffer2,sizeof(inputBuffer2),stdin);
+              if(strlen(inputBuffer2)==1)exit(0);
+             write(pfd2[1],inputBuffer2,sizeof(inputBuffer2));
+        }
+      
+   }
+
+}

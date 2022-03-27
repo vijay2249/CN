@@ -1,0 +1,32 @@
+CN Assignments 8-1-2022
+
+1. PC (Parent Child) – Two way : Parent Process P, child process P'  two way using two pipes.
+    Proces P reads data (string of characters) from keyboard and sends to P'. 
+    Then P' reads from pipe and display onto the screen. 
+    Now P' reads data from keyboard and sends to P. 
+    The process P reads from pipe and display onto the screen. 
+❖	Continue the communication till null data input.
+
+
+2. P1 P2 – Two way: Parent Process P1, child process P2 (created by P1 using fork() and exec() )   two way using two pipes.
+    Proces P1 reads data (string of characters) from keyboard and sends to P2. 
+    Then P2 reads and displays onto the screen. 
+    Now P2 reads data from keyboard and sends to P1. 
+    The process P1 reads and displays onto the screen. 
+(use dup2() and getback the 0(keyboard) and 1(screen) in the process P2).
+❖	P2 has to display first output as “ I am process P2 ”. 
+❖	Continue the communication till null data input.
+
+3. P1 P2 P3 – Two way: Parent Process P1, child process P2 ( created by P1 using fork() and exec() )  , grand child P3 ( created by P2 using fork() and exec() ). 
+    Proces P1 reads data (string of characters) from keyboard and sends to P2.
+    Then P2 reads and just forwards the data to P3. 
+    Then P3 reads and displays data onto the screen. 
+    Now P3 reads data from keyboard and sends to P2. 
+    Then P2 reads and just forwards the data to P1. 
+    The process P1 reads and displays onto the screen. 
+❖	P2 has to display first output as “ I am process P2 ”. 
+❖	P3 has to display first output as “ I am process P3 ”. 
+❖	Continue the communication till null data input.
+ 
+Google form link for submission: 
+https://forms.gle/xMveUjZRdGUzXQ779

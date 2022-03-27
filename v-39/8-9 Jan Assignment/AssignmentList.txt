@@ -1,0 +1,10 @@
+1. do exec("p2.exe") in child
+2. along with one, do exec("p3.exe") in parent and 
+   in p2:<do sleep(10000)>, 
+   in p3:<do sleep(5000)> 
+   and see which program<among p2 and p3> completes first with wait(&pid)
+3. write code in parent such that it executes a certain part of code after 
+   termination of a particular program<p2 or p3>
+4. use 1 fd[2] and pipe() to 1-way communicate from parent to child.
+5. fd and pipe for 2-way communication
+6. use dup2 to communicate between parent and exec("p2.exe") in child
